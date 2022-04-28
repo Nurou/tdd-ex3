@@ -9,7 +9,7 @@ function randomElement(arr) {
 }
 
 /* 
-a function that reads user data from a file, and from the 3 that registered last by date,
+a function that reads user data from a file, and from the 3 that registered last by date and had not been suggested today,
 it returns one of them by random
 
 - time — 'registered' property on user✅
@@ -28,6 +28,10 @@ export function getSuggestedUser(filePath) {
   const lastThree = sortedByRegistration.slice(-3);
 
   const randomUser = randomElement(lastThree);
+
+  data.find((user) => user._id === randomUser._id).lastSuggested = new Date();
+
+  fs.writeFileSync(filePath, JSON.stringify(data));
 
   return randomUser;
 }
