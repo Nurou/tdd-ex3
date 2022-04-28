@@ -8,8 +8,6 @@ function randomElement(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-const filePath = `${process.cwd()}/users.json`;
-
 /* 
 a function that reads user data from a file, and from the 3 that registered last by date,
 it returns one of them by random
@@ -20,7 +18,7 @@ it returns one of them by random
 - global variables — file path ✅
 
  */
-export function getSuggestedUser() {
+export function getSuggestedUser(filePath) {
   let data = JSON.parse(fs.readFileSync(filePath));
 
   const sortedByRegistration = data.sort(
